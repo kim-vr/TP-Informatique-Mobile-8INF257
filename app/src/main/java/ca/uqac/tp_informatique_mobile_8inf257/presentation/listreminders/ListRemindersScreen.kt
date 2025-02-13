@@ -1,14 +1,12 @@
 package ca.uqac.tp_informatique_mobile_8inf257.presentation.listreminders
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -53,11 +51,11 @@ fun ListRemindersScreen(navController: NavController, remindersViewModel: ListRe
 
             LazyColumn {
                 items(remindersViewModel.reminders.value) {reminder ->
-                    Divider(
+                    HorizontalDivider(
                         color = Color.Gray.copy(alpha = 0.5f),
                         thickness = 1.dp
                     )
-                    ReminderCard(reminder)
+                    ReminderCard(reminder, remindersViewModel)
                 }
             }
         }

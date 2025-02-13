@@ -11,9 +11,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ca.uqac.tp_informatique_mobile_8inf257.navigation.Screen
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.listreminders.ListRemindersScreen
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.listreminders.ListRemindersViewModel
 import ca.uqac.tp_informatique_mobile_8inf257.ui.theme.TPInformatiqueMobile8INF257Theme
 
 class MainActivity : ComponentActivity() {
@@ -27,10 +31,13 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = Screen.HomeScreen.route,
+                        startDestination = Screen.RemindersScreen.route,
                         modifier = Modifier.padding(innerPadding)
                     ) {
-
+                        composable(route = Screen.RemindersScreen.route) {
+                            val reminders =  viewModel<ListRemindersViewModel>()
+                            ListRemindersScreen(navController, reminders)
+                        }
                     }
                 }
             }
