@@ -9,8 +9,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="599eb28b-9f1b-4ae6-b76f-c6755286f50d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/MainActivity.kt" afterDir="false" />
+    <list default="true" id="599eb28b-9f1b-4ae6-b76f-c6755286f50d" name="Changes" comment="Project creation and add necessary librairies for MVVM and Navigation">
+      <change afterPath="$PROJECT_DIR$/.idea/modules/app/TP-Informatique-Mobile-8INF257.app.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/navigation/Screens.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/presentation/components/Menu.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/utils/Utils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/MainActivity.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +31,13 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -35,7 +47,6 @@
 }</component>
   <component name="ProjectId" id="2sy4a1N7GP8Li2CGvaNNpcwnRAE" />
   <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
@@ -44,10 +55,12 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/kimvr/Documents/TP_Informatique_Mobile/Stories14fev",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
@@ -133,6 +146,36 @@
       <option name="presentableId" value="Default" />
       <updated>1739414541201</updated>
     </task>
+    <task id="LOCAL-00001" summary="Project creation and add necessary librairies for MVVM and Navigation">
+      <option name="closed" value="true" />
+      <created>1739415838907</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739415838907</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="Project creation and add necessary librairies for MVVM and Navigation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Project creation and add necessary librairies for MVVM and Navigation" />
+  </component>
+  <component name="play_dynamic_filters_status">
+    <option name="appIdToCheckInfo">
+      <map>
+        <entry key="ca.uqac.tp_informatique_mobile_8inf257">
+          <value>
+            <CheckInfo lastCheckTimestamp="1739415840064" />
+          </value>
+        </entry>
+        <entry key="ca.uqac.tp_informatique_mobile_8inf257.test">
+          <value>
+            <CheckInfo lastCheckTimestamp="1739415840065" />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
