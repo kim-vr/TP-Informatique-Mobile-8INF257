@@ -16,6 +16,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ca.uqac.tp_informatique_mobile_8inf257.navigation.Screen
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoScreen
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoViewModel
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoListScreen
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoListViewModel
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.listreminders.ListRemindersScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.listreminders.ListRemindersViewModel
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsScreen
