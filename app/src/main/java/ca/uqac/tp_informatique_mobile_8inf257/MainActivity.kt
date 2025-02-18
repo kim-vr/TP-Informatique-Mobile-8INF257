@@ -11,9 +11,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ca.uqac.tp_informatique_mobile_8inf257.navigation.Screen
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoScreen
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoViewModel
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoListScreen
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoListViewModel
 import ca.uqac.tp_informatique_mobile_8inf257.ui.theme.TPInformatiqueMobile8INF257Theme
 
 class MainActivity : ComponentActivity() {
@@ -27,10 +33,17 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = Screen.HomeScreen.route,
+                        startDestination = Screen.TodoListScreen.route,
                         modifier = Modifier.padding(innerPadding)
                     ) {
-
+                        composable(route = Screen.TodoListScreen.route) {
+                            val todolist =  viewModel<ToDoListViewModel>()
+                            ToDoListScreen(navController, todolist)
+                        }
+                        composable(route = Screen.AddToDoScreen.route) {
+                            val todo =  viewModel<AddToDoViewModel>()
+                            AddToDoScreen(navController, todo)
+                        }
                     }
                 }
             }
