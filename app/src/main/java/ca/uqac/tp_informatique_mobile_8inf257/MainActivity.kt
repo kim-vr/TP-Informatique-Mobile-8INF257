@@ -18,6 +18,8 @@ import androidx.navigation.compose.rememberNavController
 import ca.uqac.tp_informatique_mobile_8inf257.navigation.Screen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.listreminders.ListRemindersScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.listreminders.ListRemindersViewModel
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsScreen
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsViewModel
 import ca.uqac.tp_informatique_mobile_8inf257.ui.theme.TPInformatiqueMobile8INF257Theme
 
 class MainActivity : ComponentActivity() {
@@ -31,12 +33,12 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = Screen.RemindersScreen.route,
+                        startDestination = Screen.NotificationsScreen.route,
                         modifier = Modifier.padding(innerPadding)
                     ) {
-                        composable(route = Screen.RemindersScreen.route) {
-                            val reminders =  viewModel<ListRemindersViewModel>()
-                            ListRemindersScreen(navController, reminders)
+                        composable(route = Screen.NotificationsScreen.route) {
+                            val notifications =  viewModel<NotificationsViewModel>()
+                            NotificationsScreen(navController, notifications)
                         }
                     }
                 }

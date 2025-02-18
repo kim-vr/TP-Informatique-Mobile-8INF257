@@ -18,10 +18,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.ReminderVM
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.listreminders.ListRemindersViewModel
-import ca.uqac.tp_informatique_mobile_8inf257.presentation.listreminders.ReminderEvent
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsEvent
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsViewModel
 
 @Composable
-fun ReminderCard(reminder: ReminderVM, remindersViewModel: ListRemindersViewModel) {
+fun NotificationsCard(reminder: ReminderVM, notificationsViewModel: NotificationsViewModel) {
     Box (
         modifier = Modifier.fillMaxSize()
             .padding(16.dp)
@@ -51,8 +52,10 @@ fun ReminderCard(reminder: ReminderVM, remindersViewModel: ListRemindersViewMode
                     )
                 )
                 Switch(
-                    checked = reminder.active.value,
-                    onCheckedChange = { remindersViewModel.onEvent(ReminderEvent.ChangeIsActive(reminder))},
+                    checked = reminder.active.value, // Utilisation de MutableState ici
+                    onCheckedChange = {
+                        notificationsViewModel.onEvent(NotificationsEvent.ChangeIsActive(reminder))
+                    },
                     colors = SwitchDefaults.colors(
                         checkedThumbColor = Color.White,
                         checkedTrackColor = Color(0xFF4CAF50),

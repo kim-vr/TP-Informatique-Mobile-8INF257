@@ -1,4 +1,4 @@
-package ca.uqac.tp_informatique_mobile_8inf257.presentation.listreminders
+package ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -8,7 +8,7 @@ import ca.uqac.tp_informatique_mobile_8inf257.presentation.ReminderVM
 import ca.uqac.tp_informatique_mobile_8inf257.utils.changeIsActiveInList
 import ca.uqac.tp_informatique_mobile_8inf257.utils.getReminders
 
-class ListRemindersViewModel() : ViewModel() {
+class NotificationsViewModel() : ViewModel() {
     private val _reminders: MutableState<List<ReminderVM>> = mutableStateOf(emptyList())
     var reminders: State<List<ReminderVM>> = _reminders
 
@@ -20,14 +20,17 @@ class ListRemindersViewModel() : ViewModel() {
         return getReminders()
     }
 
-    fun onEvent(event: ReminderEvent) {
-        when(event) {
-            is ReminderEvent.ChangeIsActive -> {
-                //changeIsActive(event.reminder)
+    fun onEvent(event: NotificationsEvent) {
+        when (event) {
+            is NotificationsEvent.ChangeIsActive -> {
+                // Mettre à jour l'état du rappel
+                event.reminder.active.value = !event.reminder.active.value
             }
-            is ReminderEvent.Modify -> TODO()
+
+            is NotificationsEvent.Modify -> TODO()
         }
     }
+
 
     /*private fun changeIsActive(reminder: ReminderVM) {
         _reminders.value = _reminders.value.toMutableList().apply {
