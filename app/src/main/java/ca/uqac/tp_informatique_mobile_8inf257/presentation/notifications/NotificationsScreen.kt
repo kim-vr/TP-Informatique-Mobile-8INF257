@@ -50,7 +50,7 @@ fun NotificationsScreen(navController: NavController, notificationsViewModel: No
         ) {
             Column {
                 Text(
-                    text = "Mes Notifications",
+                    text = "Mes Routines",
                     modifier = Modifier
                         .fillMaxWidth(),
                     style = TextStyle(fontSize = 36.sp)
@@ -58,7 +58,7 @@ fun NotificationsScreen(navController: NavController, notificationsViewModel: No
 
                 // Bouton pour afficher le modal
                 Button(onClick = { showModal = true }) {
-                    Text(text = "Ajouter une notification")
+                    Text(text = "Ajouter une routine")
                 }
 
                 LazyColumn {
