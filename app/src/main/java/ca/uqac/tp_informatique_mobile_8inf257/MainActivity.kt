@@ -1,5 +1,6 @@
 package ca.uqac.tp_informatique_mobile_8inf257
 
+import Menu
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -29,10 +30,9 @@ import ca.uqac.tp_informatique_mobile_8inf257.ui.theme.TPInformatiqueMobile8INF2
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             TPInformatiqueMobile8INF257Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = { Menu() }) { innerPadding ->
                     val navController = rememberNavController()
 
                     NavHost(
