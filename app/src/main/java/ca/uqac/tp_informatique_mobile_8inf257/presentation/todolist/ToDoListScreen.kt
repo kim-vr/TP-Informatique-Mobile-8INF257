@@ -63,7 +63,7 @@ fun ToDoListScreen(navController: NavController,
             )
             HorizontalDivider()
             LazyColumn {
-                items(toDoListViewModel.todos.value) { todo ->
+                items(toDoListViewModel.uncheckedTodos.value) { todo ->
                     Row (
                         modifier = Modifier.fillMaxSize(),
                         verticalAlignment = Alignment.CenterVertically,
@@ -88,6 +88,43 @@ fun ToDoListScreen(navController: NavController,
                 }
 
             }
+            HorizontalDivider()
+            Text(
+                text = "Tâches réalisées",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                style = TextStyle(
+                    fontSize = 36.sp,
+                    textAlign = TextAlign.Start
+                )
+            )
+            LazyColumn {
+                items(toDoListViewModel.checkedTodos.value) { todo ->
+                    Row(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            todo.description,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            style = TextStyle(
+                                fontSize = 32.sp
+                            )
+                        )
+                        Checkbox(
+                            checked = todo.done,
+                            onCheckedChange = {
+                                toDoListViewModel.onEvent(ToDoEvent.Check(todo))
+                            }
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+            }
+
         }
 
     }

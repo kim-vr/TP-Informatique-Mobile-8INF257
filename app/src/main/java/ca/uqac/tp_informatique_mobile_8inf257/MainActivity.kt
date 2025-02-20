@@ -37,12 +37,22 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = Screen.NotificationsScreen.route,
+                        startDestination = Screen.TodoListScreen.route,
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable(route = Screen.NotificationsScreen.route) {
                             val notifications =  viewModel<NotificationsViewModel>()
                             NotificationsScreen(navController, notifications)
+                        }
+
+                        composable(route = Screen.TodoListScreen.route) {
+                            val todolist =  viewModel<ToDoListViewModel>()
+                            ToDoListScreen(navController, todolist)
+                        }
+
+                        composable(route = Screen.AddToDoScreen.route) {
+                            val addTodo =  viewModel<AddToDoViewModel>()
+                            AddToDoScreen(navController, addTodo)
                         }
                     }
                 }
