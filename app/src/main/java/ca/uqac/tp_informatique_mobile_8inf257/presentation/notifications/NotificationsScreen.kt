@@ -1,6 +1,7 @@
 package ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications
 
 import CustomModal
+import Menu
 import androidx.compose.foundation.layout.Box
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.listreminders.ListRemindersViewModel
 
@@ -40,24 +41,24 @@ fun NotificationsScreen(navController: NavController, notificationsViewModel: No
     // Liste mutable des notifications ajoutées manuellement
     var customNotifications by remember { mutableStateOf(listOf<ReminderVM>()) }
 
-    Scaffold { contentPadding ->
+    Scaffold () { innerPadding ->
+        // Contenu de l'écran principal ici
         Box(
             Modifier
                 .fillMaxSize()
-                .padding(contentPadding)
+                .padding(innerPadding)
         ) {
             Column {
                 Text(
-                    text = "Mes Notifications",
+                    text = "Mes Routines",
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp),
+                        .fillMaxWidth(),
                     style = TextStyle(fontSize = 36.sp)
                 )
 
                 // Bouton pour afficher le modal
                 Button(onClick = { showModal = true }) {
-                    Text(text = "Ajouter une notification")
+                    Text(text = "Ajouter une routine")
                 }
 
                 LazyColumn {
