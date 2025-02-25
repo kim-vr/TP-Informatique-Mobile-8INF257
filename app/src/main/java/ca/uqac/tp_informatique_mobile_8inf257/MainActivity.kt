@@ -31,8 +31,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ca.uqac.tp_informatique_mobile_8inf257.navigation.Screen
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoScreen
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoViewModel
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.home.HomeScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsViewModel
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoListScreen
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoListViewModel
 import ca.uqac.tp_informatique_mobile_8inf257.ui.theme.TPInformatiqueMobile8INF257Theme
 
 class MainActivity : ComponentActivity() {
@@ -67,12 +72,12 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = Screen.TodoListScreen.route,
+                        startDestination = Screen.HomeScreen.route,
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable(route = Screen.NotificationsScreen.route) {
-                            val notifications =  viewModel<NotificationsViewModel>()
-                            NotificationsScreen(navController, notifications)
+                            val reminders =  viewModel<NotificationsViewModel>()
+                            NotificationsScreen(navController, reminders)
                         }
 
                         composable(route = Screen.TodoListScreen.route) {
@@ -83,6 +88,12 @@ class MainActivity : ComponentActivity() {
                         composable(route = Screen.AddToDoScreen.route) {
                             val addTodo =  viewModel<AddToDoViewModel>()
                             AddToDoScreen(navController, addTodo)
+                        }
+
+                        composable(route = Screen.HomeScreen.route) {
+                            val todolist =  viewModel<ToDoListViewModel>()
+                            val reminders =  viewModel<NotificationsViewModel>()
+                            HomeScreen(navController, todolist, reminders)
                         }
                     }
                 }
