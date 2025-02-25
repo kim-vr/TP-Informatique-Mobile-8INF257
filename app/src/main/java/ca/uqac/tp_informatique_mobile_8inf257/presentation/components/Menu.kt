@@ -24,7 +24,7 @@ fun Menu(
     selectedItem: Int,
     onItemSelected: (Int) -> Unit
 ) {
-    val items = listOf("Accueil", "Routines", "Tâches")
+    val items = listOf("Accueil", "Routines", "Todo")
     val selectedIcons = listOf(Icons.Filled.Home, Icons.Filled.Notifications, Icons.Filled.Menu)
     val unselectedIcons =
         listOf(Icons.Outlined.Home, Icons.Outlined.Notifications, Icons.Outlined.Menu)

@@ -43,7 +43,7 @@ fun AddToDoScreen(navController: NavController,
                 .fillMaxSize()
         ) {
             Text(
-                text = "Ajouter une tâche",
+                text = "Ajouter une todo",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),

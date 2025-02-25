@@ -16,13 +16,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ca.uqac.tp_informatique_mobile_8inf257.presentation.ReminderVM
-import ca.uqac.tp_informatique_mobile_8inf257.presentation.listreminders.ListRemindersViewModel
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.NotificationVM
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsEvent
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsViewModel
 
 @Composable
-fun NotificationsCard(reminder: ReminderVM, notificationsViewModel: NotificationsViewModel) {
+fun NotificationsCard(reminder: NotificationVM, notificationsViewModel: NotificationsViewModel) {
     Box (
         modifier = Modifier.fillMaxSize()
             .padding(16.dp)

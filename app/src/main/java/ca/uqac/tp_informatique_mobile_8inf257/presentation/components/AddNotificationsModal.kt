@@ -1,4 +1,3 @@
-import android.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -8,14 +7,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.sp
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoEvent
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.components.TimePicker
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsEvent
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsViewModel
 
 
 @Composable
-fun CustomModal(showModal: Boolean, onDismiss: () -> Unit, onAddNotification: (String, String, String, String) -> Unit) {
+fun CustomModal(showModal: Boolean, onDismiss: () -> Unit, onAddNotification: (String, String, String, String) -> Unit, notificationsViewModel: NotificationsViewModel) {
     if (showModal) {
         val daysSelected = remember { mutableStateMapOf<String, Boolean>() }
 

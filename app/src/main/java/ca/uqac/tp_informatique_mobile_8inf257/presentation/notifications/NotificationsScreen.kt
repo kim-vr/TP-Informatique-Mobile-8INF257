@@ -3,7 +3,6 @@ package ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications
 import CustomModal
 import Menu
 import androidx.compose.foundation.layout.Box
-import ca.uqac.tp_informatique_mobile_8inf257.presentation.listreminders.ListRemindersViewModel
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,7 +25,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import ca.uqac.tp_informatique_mobile_8inf257.presentation.ReminderVM
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.NotificationVM
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoEvent
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.components.NotificationsCard
 import java.time.DayOfWeek
 import java.time.LocalDateTime
@@ -39,7 +39,7 @@ fun NotificationsScreen(navController: NavController, notificationsViewModel: No
     var showModal by remember { mutableStateOf(false) }
 
     // Liste mutable des notifications ajoutées manuellement
-    var customNotifications by remember { mutableStateOf(listOf<ReminderVM>()) }
+    //var customNotifications by remember { mutableStateOf(listOf<ReminderVM>()) }
 
     Scaffold () { innerPadding ->
         // Contenu de l'écran principal ici
@@ -63,21 +63,12 @@ fun NotificationsScreen(navController: NavController, notificationsViewModel: No
 
                 LazyColumn {
                     // Affiche les notifications existantes
-                    items(notificationsViewModel.reminders.value) { reminder ->
+                    items(notificationsViewModel.notificationsList) { notification ->
                         HorizontalDivider(
                             color = Color.Gray.copy(alpha = 0.5f),
                             thickness = 1.dp
                         )
-                        NotificationsCard(reminder, notificationsViewModel)
-                    }
-
-                    // Affiche les nouvelles notifications ajoutées manuellement
-                    items(customNotifications) { reminder ->
-                        HorizontalDivider(
-                            color = Color.Gray.copy(alpha = 0.5f),
-                            thickness = 1.dp
-                        )
-                        NotificationsCard(reminder, notificationsViewModel)
+                        NotificationsCard(notification, notificationsViewModel)
                     }
                 }
             }
@@ -88,15 +79,17 @@ fun NotificationsScreen(navController: NavController, notificationsViewModel: No
                 onDismiss = { showModal = false },
                 onAddNotification = { title, description, hour, days ->
                     val timeLeft = calculateTimeLeft(days, hour) // Calculer le temps restant correctement
-                    val newReminder = ReminderVM(
+                    val newReminder = NotificationVM(
                         title = title,
                         description = description,
                         selectedHour = hour,
                         days = days,
                         timeLeft = timeLeft // Temps calculé
                     )
-                    customNotifications = customNotifications + newReminder
-                }
+                    notificationsViewModel.onEvent(NotificationsEvent.AddNotification(newReminder))
+                    //customNotifications = customNotifications + newReminder
+                },
+                notificationsViewModel
             )
         }
     }

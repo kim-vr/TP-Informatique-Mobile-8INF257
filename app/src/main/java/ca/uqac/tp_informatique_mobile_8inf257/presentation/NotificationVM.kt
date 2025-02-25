@@ -1,12 +1,10 @@
 package ca.uqac.tp_informatique_mobile_8inf257.presentation
 
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.graphics.Color
 import kotlin.random.Random
 
-data class ReminderVM(
+data class NotificationVM(
     val id: Int = Random.nextInt(),
     val title: String = "",
     val selectedHour: String = "00:00",

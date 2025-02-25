@@ -8,13 +8,6 @@ fun getToDoList() : List<ToDoVM> {
     return toDoList;
 }
 
-fun getUncheckedToDoList() : List<ToDoVM> {
-    return toDoList;
-}
-fun getCheckedToDoList() : List<ToDoVM> {
-    return toDoList;
-}
-
 fun addToDo(todo: ToDoVM) {
     toDoList.add(todo)
 }
