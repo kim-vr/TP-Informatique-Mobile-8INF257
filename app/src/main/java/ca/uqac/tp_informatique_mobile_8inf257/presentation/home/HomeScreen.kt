@@ -60,7 +60,7 @@ fun HomeScreen(navController: NavController,
                 )
             )
             Text(
-                text = "Mes tâches à faire",
+                text = "Ma To Do List",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
@@ -117,7 +117,6 @@ fun HomeScreen(navController: NavController,
             LazyColumn (
                 Modifier.fillMaxSize()
             ){
-                // Affiche les notifications existantes
                 items(notificationsViewModel.notificationsList) { notification ->
                     HorizontalDivider(
                         color = Color.Gray.copy(alpha = 0.5f),
@@ -126,14 +125,6 @@ fun HomeScreen(navController: NavController,
                     NotificationsCard(notification, notificationsViewModel)
                 }
 
-                // Affiche les nouvelles notifications ajoutées manuellement
-                /*items(customNotifications) { reminder ->
-                    HorizontalDivider(
-                        color = Color.Gray.copy(alpha = 0.5f),
-                        thickness = 1.dp
-                    )
-                    NotificationsCard(reminder, notificationsViewModel)
-                }*/
             }
 
         }

@@ -52,7 +52,7 @@ fun ToDoListScreen(navController: NavController,
                 .fillMaxSize()
         ) {
             Text(
-                text = "Tâches à réaliser",
+                text = "Todo à réaliser",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
@@ -90,7 +90,7 @@ fun ToDoListScreen(navController: NavController,
             }
             HorizontalDivider()
             Text(
-                text = "Tâches réalisées",
+                text = "Todo réalisées",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),

@@ -5,7 +5,10 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.ToDoVM
+import ca.uqac.tp_informatique_mobile_8inf257.utils.getCheckedToDoList
 import ca.uqac.tp_informatique_mobile_8inf257.utils.getToDoList
+import ca.uqac.tp_informatique_mobile_8inf257.utils.getUncheckedToDoList
+import ca.uqac.tp_informatique_mobile_8inf257.utils.updateToDoStatus
 
 class ToDoListViewModel() : ViewModel() {
     private val _todos: MutableState<List<ToDoVM>> = mutableStateOf(emptyList())
@@ -26,11 +29,11 @@ class ToDoListViewModel() : ViewModel() {
     }
 
     private fun loadUncheckedTodos(): List<ToDoVM> {
-        return _todos.value.filter { !it.done }
+        return getUncheckedToDoList()
     }
 
     private fun loadCheckedTodos(): List<ToDoVM> {
-        return _todos.value.filter { it.done }
+        return getCheckedToDoList()
     }
 
     fun onEvent(event: ToDoEvent) {
@@ -42,10 +45,17 @@ class ToDoListViewModel() : ViewModel() {
     }
 
     private fun checkToDo(todo: ToDoVM) {
+        // Met à jour la liste locale du ViewModel
         _todos.value = _todos.value.map {
             if (it == todo) it.copy(done = !it.done) else it
         }
+
+        // Met à jour la liste globale dans utils
+        updateToDoStatus(todo)
+
+        // Met à jour les listes affichées
         _uncheckedTodos.value = _todos.value.filter { !it.done }
         _checkedTodos.value = _todos.value.filter { it.done }
     }
+
 }
