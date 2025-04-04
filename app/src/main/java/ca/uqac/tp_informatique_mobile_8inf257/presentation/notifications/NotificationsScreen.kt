@@ -107,6 +107,7 @@ fun NotificationsScreen(navController: NavController, notificationScreenViewMode
                     val timeInMillis = targetTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
                     val selectedDays = days.split(", ").map { it.trim() }
                     val newListOfDays = mutableListOf<DayOfWeek>()
+                    val titleOfNotif = title;
 
                     selectedDays.forEach { day ->
                         val dayOfWeek = notificationViewModel.convertStringToDayOfWeek(day)
@@ -118,7 +119,9 @@ fun NotificationsScreen(navController: NavController, notificationScreenViewMode
                     notificationViewModel.scheduleNotificationsForDays(
                         now, // Utiliser la date et l'heure actuelles
                         newListOfDays, // Liste des jours sélectionnés
-                        selectedHour // L'heure sélectionnée
+                        selectedHour,
+                        titleOfNotif,
+                        description
                     )
                     // Fermer le modal après l'ajout
                     showModal = false

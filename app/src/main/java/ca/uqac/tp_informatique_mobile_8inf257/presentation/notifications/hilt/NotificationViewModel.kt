@@ -31,7 +31,7 @@ class NotificationViewModel @Inject constructor(
 ) : ViewModel() {
 
     // Fonction pour planifier une notification
-    public fun scheduleNotificationsForDays(now: LocalDateTime, selectedDays: List<DayOfWeek>, selectedTime: LocalTime) {
+    public fun scheduleNotificationsForDays(now: LocalDateTime, selectedDays: List<DayOfWeek>, selectedTime: LocalTime, title: String, description: String) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         selectedDays.forEach { dayOfWeek ->
@@ -40,8 +40,8 @@ class NotificationViewModel @Inject constructor(
 
             // Créer un Intent pour la notification
             val intent = Intent(context, NotificationReceiver::class.java).apply {
-                putExtra("title", "Votre Rappel")
-                putExtra("description", "C'est l'heure de votre notification")
+                putExtra("title", title)
+                putExtra("description", description)
             }
 
             // Créer un PendingIntent
