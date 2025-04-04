@@ -1,4 +1,8 @@
 package ca.uqac.tp_informatique_mobile_8inf257
 
-class ContextualTasksApp {
-}
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+
+@HiltAndroidApp
+class ContextualTasksApp : Application()

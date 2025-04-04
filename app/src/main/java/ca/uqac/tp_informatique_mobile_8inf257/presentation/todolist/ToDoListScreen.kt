@@ -28,12 +28,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ca.uqac.tp_informatique_mobile_8inf257.navigation.Screen
 
 @Composable
-fun ToDoListScreen(navController: NavController,
-                   toDoListViewModel: ToDoListViewModel) {
+fun ToDoListScreen(navController: NavController) {
+    val toDoListViewModel: ToDoListViewModel = hiltViewModel()
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = {

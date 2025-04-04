@@ -18,12 +18,15 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ca.uqac.tp_informatique_mobile_8inf257.navigation.Screen
 
 @Composable
-fun AddToDoScreen(navController: NavController,
-                         viewModel: AddToDoViewModel) {
+fun AddToDoScreen(navController: NavController) {
+
+    val viewModel: AddToDoViewModel = hiltViewModel()
+
     Scaffold (
         floatingActionButton = {
             FloatingActionButton(

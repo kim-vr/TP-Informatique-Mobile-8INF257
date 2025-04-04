@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ca.uqac.tp_informatique_mobile_8inf257.navigation.Screen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.components.NotificationsCard
@@ -37,10 +38,11 @@ import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoEvent
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoListViewModel
 
 @Composable
-fun HomeScreen(navController: NavController,
-               toDoListViewModel: ToDoListViewModel,
-               notificationsViewModel: NotificationsViewModel
+fun HomeScreen(navController: NavController
 ) {
+    val notificationsViewModel: NotificationsViewModel = hiltViewModel()
+    val toDoListViewModel: ToDoListViewModel = hiltViewModel()
+
     Scaffold(
     ) { contentPadding ->
         Column(
@@ -117,7 +119,7 @@ fun HomeScreen(navController: NavController,
             LazyColumn (
                 Modifier.fillMaxSize()
             ){
-                items(notificationsViewModel.notificationsList) { notification ->
+                items(notificationsViewModel.notificationsList.value) { notification ->
                     HorizontalDivider(
                         color = Color.Gray.copy(alpha = 0.5f),
                         thickness = 1.dp

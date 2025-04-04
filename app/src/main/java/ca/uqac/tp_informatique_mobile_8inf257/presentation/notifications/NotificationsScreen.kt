@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.NotificationVM
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoEvent
@@ -35,7 +36,8 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 
 @Composable
-fun NotificationsScreen(navController: NavController, notificationsViewModel: NotificationsViewModel) {
+fun NotificationsScreen(navController: NavController) {
+    val notificationsViewModel: NotificationsViewModel = hiltViewModel()
     var showModal by remember { mutableStateOf(false) }
 
     // Liste mutable des notifications ajoutées manuellement
@@ -63,7 +65,7 @@ fun NotificationsScreen(navController: NavController, notificationsViewModel: No
 
                 LazyColumn {
                     // Affiche les notifications existantes
-                    items(notificationsViewModel.notificationsList) { notification ->
+                    items(notificationsViewModel.notificationsList.value) { notification ->
                         HorizontalDivider(
                             color = Color.Gray.copy(alpha = 0.5f),
                             thickness = 1.dp

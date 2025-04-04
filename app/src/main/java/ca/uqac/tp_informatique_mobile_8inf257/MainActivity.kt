@@ -31,6 +31,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.room.Room
+import ca.uqac.tp_informatique_mobile_8inf257.data.source.NotificationsDatabase
+import ca.uqac.tp_informatique_mobile_8inf257.data.source.ToDoListDatabase
 import ca.uqac.tp_informatique_mobile_8inf257.navigation.Screen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoViewModel
@@ -40,8 +43,27 @@ import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.Notific
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoListScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoListViewModel
 import ca.uqac.tp_informatique_mobile_8inf257.ui.theme.TPInformatiqueMobile8INF257Theme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val toDoListDb by lazy {
+        Room.databaseBuilder(
+            applicationContext,
+            ToDoListDatabase::class.java,
+            ToDoListDatabase.DATABASE_NAME,
+        ).build()
+    }
+
+    private val notificationsDb by lazy {
+        Room.databaseBuilder(
+            applicationContext,
+            NotificationsDatabase::class.java,
+            NotificationsDatabase.DATABASE_NAME,
+        ).build()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -62,24 +84,19 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable(route = Screen.NotificationsScreen.route) {
-                            val reminders =  viewModel<NotificationsViewModel>()
-                            NotificationsScreen(navController, reminders)
+                            NotificationsScreen(navController)
                         }
 
                         composable(route = Screen.TodoListScreen.route) {
-                            val todolist =  viewModel<ToDoListViewModel>()
-                            ToDoListScreen(navController, todolist)
+                            ToDoListScreen(navController)
                         }
 
                         composable(route = Screen.AddToDoScreen.route) {
-                            val addTodo =  viewModel<AddToDoViewModel>()
-                            AddToDoScreen(navController, addTodo)
+                            AddToDoScreen(navController)
                         }
 
                         composable(route = Screen.HomeScreen.route) {
-                            val todolist =  viewModel<ToDoListViewModel>()
-                            val reminders =  viewModel<NotificationsViewModel>()
-                            HomeScreen(navController, todolist, reminders)
+                            HomeScreen(navController)
                         }
                     }
                 }

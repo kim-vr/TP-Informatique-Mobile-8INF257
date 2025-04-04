@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".ContextualTasksApp"
         android:allowBackup="true"
         android:windowSoftInputMode="adjustResize"
         android:fitsSystemWindows="false"

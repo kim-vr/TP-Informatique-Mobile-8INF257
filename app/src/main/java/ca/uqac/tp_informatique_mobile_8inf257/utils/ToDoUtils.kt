@@ -23,6 +23,7 @@ fun updateToDoStatus(todo: ToDoVM) {
     }
 }
 
+class ToDoException(message: String) : Throwable(message)
 
 
 
