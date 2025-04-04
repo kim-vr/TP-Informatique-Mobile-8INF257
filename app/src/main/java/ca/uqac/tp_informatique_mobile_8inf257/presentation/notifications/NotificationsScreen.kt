@@ -1,7 +1,6 @@
 package ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications
 
 import CustomModal
-import Menu
 import androidx.compose.foundation.layout.Box
 
 import androidx.compose.foundation.layout.Column
@@ -24,51 +23,61 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.NotificationVM
-import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoEvent
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.components.NotificationsCard
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.hilt.NotificationViewModel
 import java.time.DayOfWeek
 import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 
 @Composable
-fun NotificationsScreen(navController: NavController, notificationsViewModel: NotificationsViewModel) {
+fun NotificationsScreen(navController: NavController, notificationScreenViewModel: NotificationScreenViewModel) {
     var showModal by remember { mutableStateOf(false) }
-
-    // Liste mutable des notifications ajoutées manuellement
-    //var customNotifications by remember { mutableStateOf(listOf<ReminderVM>()) }
-
-    Scaffold () { innerPadding ->
-        // Contenu de l'écran principal ici
+    val notificationViewModel: NotificationViewModel = hiltViewModel()
+    // Scaffold pour organiser le contenu de l'écran
+    Scaffold { innerPadding ->
         Box(
-            Modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
             Column {
+                // Titre de l'écran
                 Text(
                     text = "Mes Routines",
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .padding(16.dp),  // Ajouter un peu de padding
                     style = TextStyle(fontSize = 36.sp)
                 )
 
-                // Bouton pour afficher le modal
-                Button(onClick = { showModal = true }) {
+                // Bouton pour ajouter une routine (affiche le modal)
+                Button(
+                    onClick = {
+                        showModal = true
+
+                    }
+                ) {
                     Text(text = "Ajouter une routine")
                 }
 
-                LazyColumn {
-                    // Affiche les notifications existantes
-                    items(notificationsViewModel.notificationsList) { notification ->
+                // Liste des notifications avec LazyColumn
+                LazyColumn(
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    items(notificationScreenViewModel.notificationsList) { notification ->
+                        // Diviseur entre les notifications
                         HorizontalDivider(
                             color = Color.Gray.copy(alpha = 0.5f),
-                            thickness = 1.dp
+                            thickness = 1.dp,
+                            modifier = Modifier.padding(vertical = 8.dp)
                         )
-                        NotificationsCard(notification, notificationsViewModel)
+                        NotificationsCard(notification, notificationScreenViewModel)
                     }
                 }
             }
@@ -78,18 +87,43 @@ fun NotificationsScreen(navController: NavController, notificationsViewModel: No
                 showModal = showModal,
                 onDismiss = { showModal = false },
                 onAddNotification = { title, description, hour, days ->
-                    val timeLeft = calculateTimeLeft(days, hour) // Calculer le temps restant correctement
+                    // Calculer le temps restant avant la notification
+                    val timeLeft = calculateTimeLeft(days, hour)
                     val newReminder = NotificationVM(
                         title = title,
                         description = description,
                         selectedHour = hour,
                         days = days,
-                        timeLeft = timeLeft // Temps calculé
+                        timeLeft = timeLeft  // Temps restant calculé
                     )
-                    notificationsViewModel.onEvent(NotificationsEvent.AddNotification(newReminder))
-                    //customNotifications = customNotifications + newReminder
+
+                    // Ajouter la nouvelle notification au ViewModel
+                    notificationScreenViewModel.onEvent(NotificationsEvent.AddNotification(newReminder))
+
+                    // Calculer l'heure exacte pour la notification
+                    val now = LocalDateTime.now()
+                    val selectedHour = LocalTime.parse(hour, DateTimeFormatter.ofPattern("HH:mm"))
+                    val targetTime = now.withHour(selectedHour.hour).withMinute(selectedHour.minute).withSecond(0)
+                    val timeInMillis = targetTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+                    val selectedDays = days.split(", ").map { it.trim() }
+                    val newListOfDays = mutableListOf<DayOfWeek>()
+
+                    selectedDays.forEach { day ->
+                        val dayOfWeek = notificationViewModel.convertStringToDayOfWeek(day)
+                        newListOfDays.add(dayOfWeek)  // Ajouter à la liste mutable
+                    }
+
+
+                    // Planifier l'envoi de la notification
+                    notificationViewModel.scheduleNotificationsForDays(
+                        now, // Utiliser la date et l'heure actuelles
+                        newListOfDays, // Liste des jours sélectionnés
+                        selectedHour // L'heure sélectionnée
+                    )
+                    // Fermer le modal après l'ajout
+                    showModal = false
                 },
-                notificationsViewModel
+                notificationScreenViewModel = notificationScreenViewModel
             )
         }
     }

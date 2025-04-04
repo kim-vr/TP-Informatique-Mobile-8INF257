@@ -1,6 +1,5 @@
 package ca.uqac.tp_informatique_mobile_8inf257.presentation.home
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,12 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,16 +25,15 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import ca.uqac.tp_informatique_mobile_8inf257.navigation.Screen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.components.NotificationsCard
-import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsViewModel
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationScreenViewModel
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoEvent
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoListViewModel
 
 @Composable
 fun HomeScreen(navController: NavController,
                toDoListViewModel: ToDoListViewModel,
-               notificationsViewModel: NotificationsViewModel
+               notificationScreenViewModel: NotificationScreenViewModel
 ) {
     Scaffold(
     ) { contentPadding ->
@@ -117,12 +111,12 @@ fun HomeScreen(navController: NavController,
             LazyColumn (
                 Modifier.fillMaxSize()
             ){
-                items(notificationsViewModel.notificationsList) { notification ->
+                items(notificationScreenViewModel.notificationsList) { notification ->
                     HorizontalDivider(
                         color = Color.Gray.copy(alpha = 0.5f),
                         thickness = 1.dp
                     )
-                    NotificationsCard(notification, notificationsViewModel)
+                    NotificationsCard(notification, notificationScreenViewModel)
                 }
 
             }

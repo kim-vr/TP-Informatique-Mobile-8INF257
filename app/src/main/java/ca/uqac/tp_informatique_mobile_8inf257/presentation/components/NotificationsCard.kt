@@ -18,10 +18,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.NotificationVM
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsEvent
-import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsViewModel
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationScreenViewModel
 
 @Composable
-fun NotificationsCard(reminder: NotificationVM, notificationsViewModel: NotificationsViewModel) {
+fun NotificationsCard(reminder: NotificationVM, notificationScreenViewModel: NotificationScreenViewModel) {
     Box (
         modifier = Modifier.fillMaxSize()
             .padding(16.dp)
@@ -53,7 +53,7 @@ fun NotificationsCard(reminder: NotificationVM, notificationsViewModel: Notifica
                 Switch(
                     checked = reminder.active.value, // Utilisation de MutableState ici
                     onCheckedChange = {
-                        notificationsViewModel.onEvent(NotificationsEvent.ChangeIsActive(reminder))
+                        notificationScreenViewModel.onEvent(NotificationsEvent.ChangeIsActive(reminder))
                     },
                     colors = SwitchDefaults.colors(
                         checkedThumbColor = Color.White,

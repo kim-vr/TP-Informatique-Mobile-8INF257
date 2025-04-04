@@ -11,5 +11,5 @@ data class NotificationVM(
     val description: String = "",
     val days: String = "Une fois",
     val timeLeft: String = "",
-    var active: MutableState<Boolean> = mutableStateOf(false),
+    var active: MutableState<Boolean> = mutableStateOf(true),
 )

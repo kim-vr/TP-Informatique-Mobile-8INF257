@@ -8,14 +8,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.unit.sp
-import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoEvent
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.components.TimePicker
-import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsEvent
-import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsViewModel
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationScreenViewModel
 
 
 @Composable
-fun CustomModal(showModal: Boolean, onDismiss: () -> Unit, onAddNotification: (String, String, String, String) -> Unit, notificationsViewModel: NotificationsViewModel) {
+fun CustomModal(showModal: Boolean, onDismiss: () -> Unit, onAddNotification: (String, String, String, String) -> Unit, notificationScreenViewModel: NotificationScreenViewModel) {
     if (showModal) {
         val daysSelected = remember { mutableStateMapOf<String, Boolean>() }
 
