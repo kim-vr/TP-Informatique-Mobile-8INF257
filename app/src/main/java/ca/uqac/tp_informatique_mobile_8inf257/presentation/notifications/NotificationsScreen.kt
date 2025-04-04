@@ -29,16 +29,18 @@ import androidx.navigation.NavController
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.NotificationVM
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoEvent
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.components.NotificationsCard
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.hilt.NotificationViewModel
 import java.time.DayOfWeek
 import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 
 @Composable
-fun NotificationsScreen(navController: NavController) {
-    val notificationsViewModel: NotificationsViewModel = hiltViewModel()
+fun NotificationsScreen(navController: NavController, notificationsViewModel: NotificationsViewModel) {
     var showModal by remember { mutableStateOf(false) }
+    val notificationViewModel: NotificationViewModel = hiltViewModel()
 
     // Liste mutable des notifications ajoutées manuellement
     //var customNotifications by remember { mutableStateOf(listOf<ReminderVM>()) }
@@ -54,7 +56,8 @@ fun NotificationsScreen(navController: NavController) {
                 Text(
                     text = "Mes Routines",
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .padding(16.dp),
                     style = TextStyle(fontSize = 36.sp)
                 )
 
@@ -65,10 +68,11 @@ fun NotificationsScreen(navController: NavController) {
 
                 LazyColumn {
                     // Affiche les notifications existantes
-                    items(notificationsViewModel.notificationsList.value) { notification ->
+                    items(notificationsViewModel.notificationsList) { notification ->
                         HorizontalDivider(
                             color = Color.Gray.copy(alpha = 0.5f),
-                            thickness = 1.dp
+                            thickness = 1.dp,
+                            modifier = Modifier.padding(vertical = 8.dp)
                         )
                         NotificationsCard(notification, notificationsViewModel)
                     }
@@ -88,10 +92,35 @@ fun NotificationsScreen(navController: NavController) {
                         days = days,
                         timeLeft = timeLeft // Temps calculé
                     )
+
                     notificationsViewModel.onEvent(NotificationsEvent.AddNotification(newReminder))
-                    //customNotifications = customNotifications + newReminder
+                    // Calculer l'heure exacte pour la notification
+                    val now = LocalDateTime.now()
+                    val selectedHour = LocalTime.parse(hour, DateTimeFormatter.ofPattern("HH:mm"))
+                    val targetTime = now.withHour(selectedHour.hour).withMinute(selectedHour.minute).withSecond(0)
+                    val timeInMillis = targetTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+                    val selectedDays = days.split(", ").map { it.trim() }
+                    val newListOfDays = mutableListOf<DayOfWeek>()
+                    val titleOfNotif = title;
+
+                    selectedDays.forEach { day ->
+                        val dayOfWeek = notificationViewModel.convertStringToDayOfWeek(day)
+                        newListOfDays.add(dayOfWeek)  // Ajouter à la liste mutable
+                    }
+
+
+                    // Planifier l'envoi de la notification
+                    notificationViewModel.scheduleNotificationsForDays(
+                        now, // Utiliser la date et l'heure actuelles
+                        newListOfDays, // Liste des jours sélectionnés
+                        selectedHour,
+                        titleOfNotif,
+                        description
+                    )
+                    // Fermer le modal après l'ajout
+                    showModal = false
                 },
-                notificationsViewModel
+                notificationScreenViewModel = notificationScreenViewModel
             )
         }
     }

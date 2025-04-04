@@ -119,7 +119,7 @@ fun HomeScreen(navController: NavController
             LazyColumn (
                 Modifier.fillMaxSize()
             ){
-                items(notificationsViewModel.notificationsList.value) { notification ->
+                items(notificationsViewModel.notificationsList) { notification ->
                     HorizontalDivider(
                         color = Color.Gray.copy(alpha = 0.5f),
                         thickness = 1.dp

@@ -1,10 +1,15 @@
 package ca.uqac.tp_informatique_mobile_8inf257
 
 import Menu
+import android.Manifest.permission.POST_NOTIFICATIONS
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -27,6 +32,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -47,7 +54,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
     private val toDoListDb by lazy {
         Room.databaseBuilder(
             applicationContext,
@@ -64,8 +70,39 @@ class MainActivity : ComponentActivity() {
         ).build()
     }
 
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            Log.d(null, "Permission accordée")
+        } else {
+            Log.d(null, "Permission refusée")
+        }
+    }
+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            when {
+                ContextCompat.checkSelfPermission(
+                    this, POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED -> { // Permission déjà accordée
+                }
+
+                ActivityCompat.shouldShowRequestPermissionRationale(
+                    this, POST_NOTIFICATIONS
+                ) -> {
+                    requestPermissionLauncher.launch(POST_NOTIFICATIONS)
+                }
+                else -> {
+                    requestPermissionLauncher.launch(POST_NOTIFICATIONS)
+                }
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestNotificationPermission()
         setContent {
             TPInformatiqueMobile8INF257Theme {
                 val navController = rememberNavController()
@@ -84,7 +121,8 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable(route = Screen.NotificationsScreen.route) {
-                            NotificationsScreen(navController)
+                            val reminders =  viewModel<NotificationsViewModel>()
+                            NotificationsScreen(navController, reminders)
                         }
 
                         composable(route = Screen.TodoListScreen.route) {
