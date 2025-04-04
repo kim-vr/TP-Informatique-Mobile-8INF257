@@ -46,7 +46,7 @@ import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoViewModel
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.home.HomeScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsScreen
-import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsViewModel
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationScreenViewModel
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoListScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoListViewModel
 import ca.uqac.tp_informatique_mobile_8inf257.ui.theme.TPInformatiqueMobile8INF257Theme
@@ -121,8 +121,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable(route = Screen.NotificationsScreen.route) {
-                            val reminders =  viewModel<NotificationsViewModel>()
-                            NotificationsScreen(navController, reminders)
+                            NotificationsScreen(navController)
                         }
 
                         composable(route = Screen.TodoListScreen.route) {

@@ -13,7 +13,7 @@ import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.Notific
 
 
 @Composable
-fun CustomModal(showModal: Boolean, onDismiss: () -> Unit, onAddNotification: (String, String, String, String) -> Unit, notificationScreenViewModel: NotificationScreenViewModel) {
+fun CustomModal(showModal: Boolean, onDismiss: () -> Unit, onAddNotification: (String, String, String, String) -> Unit, notificationScreenViewModel : NotificationScreenViewModel) {
     if (showModal) {
         val daysSelected = remember { mutableStateMapOf<String, Boolean>() }
 

@@ -33,14 +33,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ca.uqac.tp_informatique_mobile_8inf257.navigation.Screen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.components.NotificationsCard
-import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsViewModel
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationScreenViewModel
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.hilt.NotificationViewModel
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoEvent
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoListViewModel
 
 @Composable
 fun HomeScreen(navController: NavController
 ) {
-    val notificationsViewModel: NotificationsViewModel = hiltViewModel()
+    val notificationScreenViewModel: NotificationScreenViewModel = hiltViewModel()
     val toDoListViewModel: ToDoListViewModel = hiltViewModel()
 
     Scaffold(
@@ -119,12 +120,12 @@ fun HomeScreen(navController: NavController
             LazyColumn (
                 Modifier.fillMaxSize()
             ){
-                items(notificationsViewModel.notificationsList) { notification ->
+                items(notificationScreenViewModel.notificationsList.value) { notification ->
                     HorizontalDivider(
                         color = Color.Gray.copy(alpha = 0.5f),
                         thickness = 1.dp
                     )
-                    NotificationsCard(notification, notificationsViewModel)
+                    NotificationsCard(notification, notificationScreenViewModel)
                 }
 
             }

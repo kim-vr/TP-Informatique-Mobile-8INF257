@@ -38,9 +38,10 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 
 @Composable
-fun NotificationsScreen(navController: NavController, notificationsViewModel: NotificationsViewModel) {
+fun NotificationsScreen(navController: NavController) {
     var showModal by remember { mutableStateOf(false) }
-    val notificationViewModel: NotificationViewModel = hiltViewModel()
+    val notificationsScreenViewModel: NotificationScreenViewModel = hiltViewModel()
+    val notificationsViewModel: NotificationViewModel = hiltViewModel()
 
     // Liste mutable des notifications ajoutées manuellement
     //var customNotifications by remember { mutableStateOf(listOf<ReminderVM>()) }
@@ -68,13 +69,13 @@ fun NotificationsScreen(navController: NavController, notificationsViewModel: No
 
                 LazyColumn {
                     // Affiche les notifications existantes
-                    items(notificationsViewModel.notificationsList) { notification ->
+                    items(notificationsScreenViewModel.notificationsList.value) { notification ->
                         HorizontalDivider(
                             color = Color.Gray.copy(alpha = 0.5f),
                             thickness = 1.dp,
                             modifier = Modifier.padding(vertical = 8.dp)
                         )
-                        NotificationsCard(notification, notificationsViewModel)
+                        NotificationsCard(notification, notificationsScreenViewModel)
                     }
                 }
             }
@@ -93,7 +94,7 @@ fun NotificationsScreen(navController: NavController, notificationsViewModel: No
                         timeLeft = timeLeft // Temps calculé
                     )
 
-                    notificationsViewModel.onEvent(NotificationsEvent.AddNotification(newReminder))
+                    notificationsScreenViewModel.onEvent(NotificationsEvent.AddNotification(newReminder))
                     // Calculer l'heure exacte pour la notification
                     val now = LocalDateTime.now()
                     val selectedHour = LocalTime.parse(hour, DateTimeFormatter.ofPattern("HH:mm"))
@@ -104,13 +105,13 @@ fun NotificationsScreen(navController: NavController, notificationsViewModel: No
                     val titleOfNotif = title;
 
                     selectedDays.forEach { day ->
-                        val dayOfWeek = notificationViewModel.convertStringToDayOfWeek(day)
+                        val dayOfWeek = notificationsViewModel.convertStringToDayOfWeek(day)
                         newListOfDays.add(dayOfWeek)  // Ajouter à la liste mutable
                     }
 
 
                     // Planifier l'envoi de la notification
-                    notificationViewModel.scheduleNotificationsForDays(
+                    notificationsViewModel.scheduleNotificationsForDays(
                         now, // Utiliser la date et l'heure actuelles
                         newListOfDays, // Liste des jours sélectionnés
                         selectedHour,
@@ -120,7 +121,7 @@ fun NotificationsScreen(navController: NavController, notificationsViewModel: No
                     // Fermer le modal après l'ajout
                     showModal = false
                 },
-                notificationScreenViewModel = notificationScreenViewModel
+                notificationScreenViewModel = notificationsScreenViewModel
             )
         }
     }

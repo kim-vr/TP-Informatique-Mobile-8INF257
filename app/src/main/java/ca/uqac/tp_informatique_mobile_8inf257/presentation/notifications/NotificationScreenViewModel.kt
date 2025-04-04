@@ -22,9 +22,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NotificationsViewModel @Inject constructor
+class NotificationScreenViewModel @Inject constructor
     (private val notificationsUseCases: NotificationsUseCases) : ViewModel() {
-    private val _notificationsList: MutableState<List<NotificationVM>> = mutableStateOf(emptyList())
+    private val _notificationsList = mutableStateOf<List<NotificationVM>>(emptyList())
     val notificationsList: State<List<NotificationVM>> = _notificationsList
 
     var job: Job? = null
