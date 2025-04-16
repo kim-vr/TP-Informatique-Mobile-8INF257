@@ -2,18 +2,24 @@ package ca.uqac.tp_informatique_mobile_8inf257.di
 
 import android.app.Application
 import androidx.room.Room
+import ca.uqac.tp_informatique_mobile_8inf257.data.source.CheatSheetsDatabase
 import ca.uqac.tp_informatique_mobile_8inf257.data.source.NotificationsDatabase
 import ca.uqac.tp_informatique_mobile_8inf257.data.source.ToDoListDatabase
-import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.DeleteNotificationUseCase
-import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.DeleteToDoUseCase
-import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.GetNotificationUseCase
-import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.GetNotificationsUseCase
-import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.GetToDoListUseCase
-import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.GetToDoUseCase
-import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.NotificationsUseCases
-import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.ToDoListUseCases
-import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.UpsertNotificationUseCase
-import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.UpsertToDoUseCase
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.cheatsheets.CheatSheetsUseCases
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.cheatsheets.DeleteCheatSheetUseCase
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.cheatsheets.GetCheatSheetUseCase
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.cheatsheets.GetCheatSheetsUseCase
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.cheatsheets.UpsertCheatSheetUseCase
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.notifications.DeleteNotificationUseCase
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.todolist.DeleteToDoUseCase
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.notifications.GetNotificationUseCase
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.notifications.GetNotificationsUseCase
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.todolist.GetToDoListUseCase
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.todolist.GetToDoUseCase
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.notifications.NotificationsUseCases
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.todolist.ToDoListUseCases
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.notifications.UpsertNotificationUseCase
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.todolist.UpsertToDoUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -62,6 +68,27 @@ object AppModule {
             getNotification = GetNotificationUseCase(db.dao),
             upsertNotification = UpsertNotificationUseCase(db.dao),
             deleteNotification = DeleteNotificationUseCase(db.dao)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideCheatSheetsDatabase(context: Application): CheatSheetsDatabase {
+        return Room.databaseBuilder(
+            context,
+            CheatSheetsDatabase::class.java,
+            CheatSheetsDatabase.DATABASE_NAME
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCheatSheetsUseCases(db: CheatSheetsDatabase) : CheatSheetsUseCases {
+        return CheatSheetsUseCases(
+            getCheatSheets = GetCheatSheetsUseCase(db.dao),
+            getCheatSheet = GetCheatSheetUseCase(db.dao),
+            upsertCheatSheet = UpsertCheatSheetUseCase(db.dao),
+            deleteCheatSheet = DeleteCheatSheetUseCase(db.dao)
         )
     }
 }

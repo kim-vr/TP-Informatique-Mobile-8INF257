@@ -56,6 +56,9 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.coil.compose)
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.junit.junit)
     ksp(libs.androidx.room.compiler)
 
     implementation(libs.hilt.android)

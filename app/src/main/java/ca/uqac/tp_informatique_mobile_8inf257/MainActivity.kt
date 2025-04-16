@@ -39,11 +39,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
+import ca.uqac.tp_informatique_mobile_8inf257.data.source.CheatSheetsDatabase
 import ca.uqac.tp_informatique_mobile_8inf257.data.source.NotificationsDatabase
 import ca.uqac.tp_informatique_mobile_8inf257.data.source.ToDoListDatabase
 import ca.uqac.tp_informatique_mobile_8inf257.navigation.Screen
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.addcheatsheet.AddCheatSheetScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoViewModel
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.cheatsheet.CheatSheetsListScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.home.HomeScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationScreenViewModel
@@ -54,22 +57,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val toDoListDb by lazy {
-        Room.databaseBuilder(
-            applicationContext,
-            ToDoListDatabase::class.java,
-            ToDoListDatabase.DATABASE_NAME,
-        ).build()
-    }
-
-    private val notificationsDb by lazy {
-        Room.databaseBuilder(
-            applicationContext,
-            NotificationsDatabase::class.java,
-            NotificationsDatabase.DATABASE_NAME,
-        ).build()
-    }
-
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
@@ -134,6 +121,14 @@ class MainActivity : ComponentActivity() {
 
                         composable(route = Screen.HomeScreen.route) {
                             HomeScreen(navController)
+                        }
+
+                        composable(route = Screen.CheatSheetsListScreen.route) {
+                            CheatSheetsListScreen(navController)
+                        }
+
+                        composable(route = Screen.AddCheatSheetScreen.route) {
+                            AddCheatSheetScreen(navController)
                         }
                     }
                 }

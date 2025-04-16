@@ -1,4 +1,4 @@
-package ca.uqac.tp_informatique_mobile_8inf257.domain.usecases
+package ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.notifications
 
 data class NotificationsUseCases (
     val getNotifications : GetNotificationsUseCase,

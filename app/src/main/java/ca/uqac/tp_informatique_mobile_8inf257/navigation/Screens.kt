@@ -5,4 +5,7 @@ sealed class Screen(val route: String) {
     data object NotificationsScreen : Screen(route = "notifications_screen")
     data object TodoListScreen : Screen(route = "todo_list_screen")
     data object AddToDoScreen : Screen(route = "add_todo_screen")
+    data object CheatSheetsListScreen : Screen(route = "cheat_sheets_list")
+    data object CheatSheetScreen : Screen(route = "cheat_sheets_list")
+    data object AddCheatSheetScreen : Screen(route = "add_cheat_sheet_screen")
 }
