@@ -3,7 +3,9 @@ package ca.uqac.tp_informatique_mobile_8inf257.presentation.addcheatsheet
 import android.content.Intent
 import android.net.Uri
 import android.provider.OpenableColumns
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -26,25 +28,20 @@ fun AddCheatSheetScreen(navController: NavController) {
     var selectedUri by remember { mutableStateOf<Uri?>(null) }
     var documentName by remember { mutableStateOf("Aucun document sélectionné") }
 
-    val filePickerLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
+    // Dans votre AddCheatSheetScreen
+    val pickMedia = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia()
     ) { uri: Uri? ->
-        selectedUri = uri
         uri?.let {
-            try {
-                context.contentResolver.takePersistableUriPermission(
-                    it,
-                    Intent.FLAG_GRANT_READ_URI_PERMISSION
-                )
-            } catch (e: SecurityException) {
-                e.printStackTrace()
-            }
+            selectedUri = it
+            documentName = title
 
-            context.contentResolver.query(it, null, null, null, null)?.use { cursor ->
-                val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                if (cursor.moveToFirst() && nameIndex != -1) {
-                    documentName = cursor.getString(nameIndex)
-                }
+            // Prenez les permissions persistantes
+            try {
+                val flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                context.contentResolver.takePersistableUriPermission(it, flags)
+            } catch (e: SecurityException) {
+                Log.e("AddCheatSheet", "Échec de la prise de permission URI persistante", e)
             }
         }
     }
@@ -77,7 +74,7 @@ fun AddCheatSheetScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(8.dp))
 
         Button(onClick = {
-            filePickerLauncher.launch("*/*") // Pour PDF, images, etc.
+            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }) {
             Text("Choisir un document")
         }

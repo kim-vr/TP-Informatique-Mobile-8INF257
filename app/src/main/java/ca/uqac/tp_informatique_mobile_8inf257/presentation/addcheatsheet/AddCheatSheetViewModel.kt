@@ -15,7 +15,7 @@ class AddCheatSheetViewModel @Inject constructor(
 
     fun addCheatSheet(title: String, description: String, documentUri: String) {
         val newCheatSheet = CheatSheet(
-            id = null, // ou auto-généré dans la base
+            id = null,
             title = title,
             description = description,
             document = documentUri
