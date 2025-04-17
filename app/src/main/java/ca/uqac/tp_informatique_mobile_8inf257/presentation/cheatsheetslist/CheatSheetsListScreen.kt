@@ -59,7 +59,15 @@ fun CheatSheetsListScreen(navController: NavController) {
 
             LazyColumn {
                 items(cheatSheets) { cheatSheet ->
-                    CheatSheetItem(cheatSheet)
+                    CheatSheetItem(
+                        cheatSheet = cheatSheet,
+                        onClick = {
+                            // Navigation avec paramètre de requête
+                            navController.navigate(
+                                Screen.CheatSheetScreen.withCheatSheetId(cheatSheet.id)
+                            )
+                        }
+                    )
                     HorizontalDivider()
                 }
             }

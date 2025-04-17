@@ -35,9 +35,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import androidx.room.Room
 import ca.uqac.tp_informatique_mobile_8inf257.data.source.CheatSheetsDatabase
 import ca.uqac.tp_informatique_mobile_8inf257.data.source.NotificationsDatabase
@@ -46,6 +48,8 @@ import ca.uqac.tp_informatique_mobile_8inf257.navigation.Screen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.addcheatsheet.AddCheatSheetScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoViewModel
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.cheatsheet.CheatSheetScreen
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.cheatsheet.CheatSheetViewModel
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.cheatsheet.CheatSheetsListScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.home.HomeScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsScreen
@@ -129,6 +133,23 @@ class MainActivity : ComponentActivity() {
 
                         composable(route = Screen.AddCheatSheetScreen.route) {
                             AddCheatSheetScreen(navController)
+                        }
+
+                        composable(
+                            route = Screen.CheatSheetScreen.route,
+                            arguments = listOf(
+                                navArgument("cheatSheetId") {
+                                    type = NavType.IntType
+                                    nullable = false
+                                    defaultValue = -1
+                                }
+                            )
+                        ) { backStackEntry ->
+                            val cheatSheetId = backStackEntry.arguments?.getInt("cheatSheetId", -1) ?: -1
+                            CheatSheetScreen(
+                                navController = navController,
+                                cheatSheetId = cheatSheetId
+                            )
                         }
                     }
                 }
