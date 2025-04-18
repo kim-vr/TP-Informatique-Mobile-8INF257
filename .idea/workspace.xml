@@ -10,8 +10,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="599eb28b-9f1b-4ae6-b76f-c6755286f50d" name="Changes" comment="Project creation and add necessary librairies for MVVM and Navigation">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/presentation/components/EditNotificationModal.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/presentation/notifications/BroadCastReceiver.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/utils/LocationUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/dependencies-accessors/6875c5071d742ba7d5726c8b512298b6248dcb62/metadata.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/dependencies-accessors/6875c5071d742ba7d5726c8b512298b6248dcb62/sources/org/gradle/accessors/dm/LibrariesForLibs.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/dependencies-accessors/6875c5071d742ba7d5726c8b512298b6248dcb62/sources/org/gradle/accessors/dm/LibrariesForLibsInPluginsBlock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/di/AppModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/di/AppModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/presentation/components/AddNotificationsModal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/presentation/components/AddNotificationsModal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/presentation/notifications/NotificationScreenViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/presentation/notifications/NotificationScreenViewModel.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/presentation/notifications/NotificationsScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/presentation/notifications/NotificationsScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/presentation/notifications/hilt/NotificationViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257/presentation/notifications/hilt/NotificationViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/libs.versions.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,10 +54,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin File" />
         <option value="Kotlin Object" />
         <option value="Class" />
         <option value="Kotlin Class" />
+        <option value="Kotlin File" />
       </list>
     </option>
   </component>
@@ -67,7 +91,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Android App.app.executor": "Run",
+    "Android App.app.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
@@ -76,7 +100,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "Localisation",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Lucas/Documents/coursUqac/mobile/TP-Informatique-Mobile-8INF257/app/src/main/java/ca/uqac/tp_informatique_mobile_8inf257",
@@ -215,7 +239,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/dev" />
+                        <option value="Localisation" />
                       </list>
                     </value>
                   </entry>
@@ -237,12 +261,12 @@
       <map>
         <entry key="ca.uqac.tp_informatique_mobile_8inf257">
           <value>
-            <CheckInfo lastCheckTimestamp="1743779116246" />
+            <CheckInfo lastCheckTimestamp="1744828372087" />
           </value>
         </entry>
         <entry key="ca.uqac.tp_informatique_mobile_8inf257.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1743779116255" />
+            <CheckInfo lastCheckTimestamp="1744828372062" />
           </value>
         </entry>
       </map>
