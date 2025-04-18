@@ -1,4 +1,4 @@
-package ca.uqac.tp_informatique_mobile_8inf257.presentation.cheatsheet
+package ca.uqac.tp_informatique_mobile_8inf257.presentation.cheatsheetslist
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.cheatsheets.CheatSheetsUseCases
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.CheatSheetVM
-import ca.uqac.tp_informatique_mobile_8inf257.presentation.cheatsheetslist.CheatSheetsListEvents
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.toEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job

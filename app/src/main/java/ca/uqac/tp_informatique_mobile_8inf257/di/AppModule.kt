@@ -2,8 +2,11 @@ package ca.uqac.tp_informatique_mobile_8inf257.di
 
 import android.app.Application
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import ca.uqac.tp_informatique_mobile_8inf257.data.source.CheatSheetsDatabase
 import ca.uqac.tp_informatique_mobile_8inf257.data.source.NotificationsDatabase
+import ca.uqac.tp_informatique_mobile_8inf257.data.source.QuizzesDatabase
 import ca.uqac.tp_informatique_mobile_8inf257.data.source.ToDoListDatabase
 import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.cheatsheets.CheatSheetsUseCases
 import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.cheatsheets.DeleteCheatSheetUseCase
@@ -19,6 +22,11 @@ import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.todolist.GetToDoUs
 import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.notifications.NotificationsUseCases
 import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.todolist.ToDoListUseCases
 import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.notifications.UpsertNotificationUseCase
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.quizzes.DeleteQuizUseCase
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.quizzes.GetQuizUseCase
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.quizzes.GetQuizzesUseCase
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.quizzes.QuizzesUseCases
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.quizzes.UpsertQuizUseCase
 import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.todolist.UpsertToDoUseCase
 import dagger.Module
 import dagger.Provides
@@ -89,6 +97,35 @@ object AppModule {
             getCheatSheet = GetCheatSheetUseCase(db.dao),
             upsertCheatSheet = UpsertCheatSheetUseCase(db.dao),
             deleteCheatSheet = DeleteCheatSheetUseCase(db.dao)
+        )
+    }
+
+    val MIGRATION_1_2 = object : Migration(1, 2) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL(
+                "ALTER TABLE questions ADD COLUMN correctAnswerIndex INTEGER NOT NULL DEFAULT 0"
+            )
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideQuizDatabase(context: Application): QuizzesDatabase {
+        return Room.databaseBuilder(
+            context,
+            QuizzesDatabase::class.java,
+            QuizzesDatabase.DATABASE_NAME
+        ).addMigrations(MIGRATION_1_2).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideQuizUseCases(db: QuizzesDatabase): QuizzesUseCases {
+        return QuizzesUseCases(
+            getQuizzes = GetQuizzesUseCase(db.dao),
+            getQuiz = GetQuizUseCase(db.dao),
+            upsertQuiz = UpsertQuizUseCase(db.dao),
+            deleteQuiz = DeleteQuizUseCase(db.dao)
         )
     }
 }

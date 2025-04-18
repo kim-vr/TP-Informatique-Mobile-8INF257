@@ -46,6 +46,7 @@ import ca.uqac.tp_informatique_mobile_8inf257.data.source.NotificationsDatabase
 import ca.uqac.tp_informatique_mobile_8inf257.data.source.ToDoListDatabase
 import ca.uqac.tp_informatique_mobile_8inf257.navigation.Screen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.addcheatsheet.AddCheatSheetScreen
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.addquiz.AddQuizScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoViewModel
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.cheatsheet.CheatSheetScreen
@@ -54,6 +55,8 @@ import ca.uqac.tp_informatique_mobile_8inf257.presentation.cheatsheet.CheatSheet
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.home.HomeScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationsScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationScreenViewModel
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.quiz.QuizScreen
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.quizzeslist.QuizzesListScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoListScreen
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.todolist.ToDoListViewModel
 import ca.uqac.tp_informatique_mobile_8inf257.ui.theme.TPInformatiqueMobile8INF257Theme
@@ -149,6 +152,28 @@ class MainActivity : ComponentActivity() {
                             CheatSheetScreen(
                                 navController = navController,
                                 cheatSheetId = cheatSheetId
+                            )
+                        }
+                        composable(route = Screen.QuizzesListScreen.route) {
+                            QuizzesListScreen(navController)
+                        }
+                        composable(route = Screen.AddQuizScreen.route) {
+                            AddQuizScreen(navController)
+                        }
+                        composable(
+                            route = Screen.QuizScreen.route,
+                            arguments = listOf(
+                                navArgument("quizId") {
+                                    type = NavType.IntType
+                                    nullable = false
+                                    defaultValue = -1
+                                }
+                            )
+                        ) { backStackEntry ->
+                            val quizId = backStackEntry.arguments?.getInt("quizId", -1) ?: -1
+                            QuizScreen(
+                                navController = navController,
+                                quizId = quizId
                             )
                         }
                     }

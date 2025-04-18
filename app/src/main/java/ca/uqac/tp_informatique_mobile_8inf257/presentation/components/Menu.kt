@@ -1,9 +1,11 @@
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Create
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Menu
@@ -26,10 +28,10 @@ fun Menu(
     selectedItem: Int,
     onItemSelected: (Int) -> Unit
 ) {
-    val items = listOf("Accueil", "Routines", "Todo", "Fiches")
-    val selectedIcons = listOf(Icons.Filled.Home, Icons.Filled.Notifications, Icons.Filled.Menu, Icons.Filled.Create)
+    val items = listOf("Accueil", "Routines", "Todo", "Fiches", "Quiz")
+    val selectedIcons = listOf(Icons.Filled.Home, Icons.Filled.Notifications, Icons.Filled.Menu, Icons.Filled.Create,Icons.Filled.CheckCircle)
     val unselectedIcons =
-        listOf(Icons.Outlined.Home, Icons.Outlined.Notifications, Icons.Outlined.Menu, Icons.Outlined.Create)
+        listOf(Icons.Outlined.Home, Icons.Outlined.Notifications, Icons.Outlined.Menu, Icons.Outlined.Create, Icons.Outlined.CheckCircle)
 
     NavigationBar {
         items.forEachIndexed { index, item ->
@@ -49,6 +51,7 @@ fun Menu(
                         1 -> navController.navigate(Screen.NotificationsScreen.route)
                         2 -> navController.navigate(Screen.TodoListScreen.route)
                         3 -> navController.navigate(Screen.CheatSheetsListScreen.route)
+                        4 -> navController.navigate(Screen.QuizzesListScreen.route)
                     }
                 }
             )

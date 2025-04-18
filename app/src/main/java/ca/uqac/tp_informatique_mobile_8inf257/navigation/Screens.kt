@@ -10,4 +10,9 @@ sealed class Screen(val route: String) {
         fun withCheatSheetId(cheatSheetId: Int): String = "cheat_sheet/cheatSheetId=$cheatSheetId"
     }
     data object AddCheatSheetScreen : Screen(route = "add_cheat_sheet_screen")
+    data object QuizzesListScreen : Screen(route = "quizzes_list_screen")
+    data object QuizScreen : Screen(route = "quiz_screen/quizId={quizId}") {
+        fun withQuizId(quizId: Int): String = "quiz_screen/quizId=$quizId"
+    }
+    data object AddQuizScreen : Screen(route = "add_quiz_screen")
 }

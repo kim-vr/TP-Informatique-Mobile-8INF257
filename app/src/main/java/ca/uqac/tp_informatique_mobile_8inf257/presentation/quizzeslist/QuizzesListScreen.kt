@@ -1,4 +1,4 @@
-package ca.uqac.tp_informatique_mobile_8inf257.presentation.cheatsheet
+package ca.uqac.tp_informatique_mobile_8inf257.presentation.quizzeslist
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -21,23 +21,23 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ca.uqac.tp_informatique_mobile_8inf257.navigation.Screen
-import ca.uqac.tp_informatique_mobile_8inf257.presentation.cheatsheetslist.CheatSheetsListViewModel
-import ca.uqac.tp_informatique_mobile_8inf257.presentation.components.CheatSheetItem
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.quizzeslist.QuizzesListViewModel
+import ca.uqac.tp_informatique_mobile_8inf257.presentation.components.QuizItem
 
 @Composable
-fun CheatSheetsListScreen(navController: NavController) {
-    val viewModel: CheatSheetsListViewModel = hiltViewModel()
-    val cheatSheets by viewModel.cheatSheets
+fun QuizzesListScreen(navController: NavController) {
+    val viewModel: QuizzesListViewModel = hiltViewModel()
+    val quizzes by viewModel.quizzes
 
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    navController.navigate(Screen.AddCheatSheetScreen.route)
+                    navController.navigate(Screen.AddQuizScreen.route)
                 },
                 modifier = Modifier.background(Color.White)
             ) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Ajouter une fiche")
+                Icon(imageVector = Icons.Default.Add, contentDescription = "Ajouter un quiz")
             }
         }
     ) { contentPadding ->
@@ -48,7 +48,7 @@ fun CheatSheetsListScreen(navController: NavController) {
                 .fillMaxSize()
         ) {
             Text(
-                text = "Mes fiches",
+                text = "Mes quiz",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
@@ -57,20 +57,18 @@ fun CheatSheetsListScreen(navController: NavController) {
             HorizontalDivider()
 
             LazyColumn {
-                items(cheatSheets) { cheatSheet ->
-                    CheatSheetItem(
-                        cheatSheet = cheatSheet,
+                items(quizzes) { quiz ->
+                    QuizItem(
+                        quiz = quiz,
                         onClick = {
-                            // Navigation avec paramètre de requête
                             navController.navigate(
-                                Screen.CheatSheetScreen.withCheatSheetId(cheatSheet.id)
+                                Screen.QuizScreen.withQuizId(quiz.id)
                             )
                         }
                     )
                     HorizontalDivider()
                 }
             }
-
         }
     }
 }
