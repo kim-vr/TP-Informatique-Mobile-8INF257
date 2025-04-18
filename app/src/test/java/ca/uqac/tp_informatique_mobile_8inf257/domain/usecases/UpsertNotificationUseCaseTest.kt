@@ -2,6 +2,7 @@ package ca.uqac.tp_informatique_mobile_8inf257.domain.usecases
 
 import ca.uqac.tp_informatique_mobile_8inf257.domain.FakeDatabaseNotifications
 import ca.uqac.tp_informatique_mobile_8inf257.domain.model.Notification
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.notifications.UpsertNotificationUseCase
 import ca.uqac.tp_informatique_mobile_8inf257.utils.NotificationException
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking

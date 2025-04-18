@@ -4,11 +4,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.ToDoListUseCases
-import ca.uqac.tp_informatique_mobile_8inf257.navigation.Screen
+import ca.uqac.tp_informatique_mobile_8inf257.domain.usecases.todolist.ToDoListUseCases
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.ToDoVM
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.toEntity
-import ca.uqac.tp_informatique_mobile_8inf257.utils.addToDo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
