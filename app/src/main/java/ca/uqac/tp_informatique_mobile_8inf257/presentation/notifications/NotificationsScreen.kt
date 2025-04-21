@@ -2,6 +2,7 @@ package ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications
 
 import CustomModal
 import Menu
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import ca.uqac.tp_informatique_mobile_8inf257.di.AppModule
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.NotificationVM
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.addtodo.AddToDoEvent
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.components.NotificationsCard
@@ -118,6 +120,8 @@ fun NotificationsScreen(navController: NavController) {
                         titleOfNotif,
                         description
                     )
+
+
                     // Fermer le modal après l'ajout
                     showModal = false
                 },

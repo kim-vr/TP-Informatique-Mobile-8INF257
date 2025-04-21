@@ -1,5 +1,5 @@
-import android.location.Geocoder
-import android.util.Log
+package ca.uqac.tp_informatique_mobile_8inf257.presentation.components
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -7,28 +7,19 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.unit.sp
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.components.TimePicker
 import ca.uqac.tp_informatique_mobile_8inf257.presentation.notifications.NotificationScreenViewModel
-import ca.uqac.tp_informatique_mobile_8inf257.utils.addGeofence
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import java.util.*
+
 
 @Composable
-fun CustomModal(
-    showModal: Boolean,
-    onDismiss: () -> Unit,
-    onAddNotification: (String, String, String, String) -> Unit,
-    notificationScreenViewModel: NotificationScreenViewModel
-) {
+fun CustomModal(showModal: Boolean, onDismiss: () -> Unit, onAddNotification: (String, String, String, String) -> Unit, notificationScreenViewModel : NotificationScreenViewModel) {
     if (showModal) {
-        val context = LocalContext.current
         val daysSelected = remember { mutableStateMapOf<String, Boolean>() }
 
+        // Initialisation des jours avec "non sélectionnés"
         if (daysSelected.isEmpty()) {
             listOf("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche").forEach { day ->
                 daysSelected[day] = false
@@ -51,10 +42,7 @@ fun CustomModal(
                     var notificationTitle by rememberSaveable { mutableStateOf("") }
                     var notificationDescription by rememberSaveable { mutableStateOf("") }
                     var notificationHour by rememberSaveable { mutableStateOf("18:00") }
-                    var address by rememberSaveable { mutableStateOf("") }
-                    var city by rememberSaveable { mutableStateOf("") }
-                    var postalCode by rememberSaveable { mutableStateOf("") }
-                    var isErrorVisible by remember { mutableStateOf(false) }
+                    var isActive by rememberSaveable { mutableStateOf(true) }
 
                     TextField(
                         value = notificationTitle,
@@ -65,10 +53,11 @@ fun CustomModal(
                     TextField(
                         value = notificationDescription,
                         onValueChange = { notificationDescription = it },
-                        label = { Text("Quelle est la description de l'évènement ?") },
+                        label = { Text("Quel est la description de l'évènement ?") },
                         modifier = Modifier.padding(16.dp)
                     )
 
+                    // Sélection des jours avec boutons
                     Row(modifier = Modifier.padding(16.dp)) {
                         val orderedDays = listOf("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche")
                         orderedDays.forEach { day ->
@@ -85,7 +74,7 @@ fun CustomModal(
                                     contentPadding = PaddingValues(0.dp),
                                     colors = ButtonDefaults.buttonColors(containerColor = buttonColor)
                                 ) {
-                                    Text(day.first().toString(), fontSize = 15.sp)
+                                    Text(day.first().toString(), fontSize = 15.sp) // Utilisation de la première lettre du jour
                                 }
                             }
                         }
@@ -94,79 +83,30 @@ fun CustomModal(
                     notificationHour = TimePicker()
 
                     Spacer(modifier = Modifier.height(16.dp))
-
-                    TextField(
-                        value = address,
-                        onValueChange = { address = it },
-                        label = { Text("Adresse") },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-
-                    TextField(
-                        value = city,
-                        onValueChange = { city = it },
-                        label = { Text("Ville") },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-
-                    TextField(
-                        value = postalCode,
-                        onValueChange = { postalCode = it },
-                        label = { Text("Code postal") },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-
-                    if (isErrorVisible) {
+                    var isErrorVisible by remember { mutableStateOf(false) }
+                    if (isErrorVisible){
                         Text("Un champ n'est pas rempli", color = Color.Red)
                     }
-
                     Row {
                         Button(onClick = onDismiss) {
                             Text("Annuler")
                         }
-
                         Spacer(modifier = Modifier.width(16.dp))
 
+
                         Button(onClick = {
-                            if (
-                                notificationTitle.isEmpty() ||
-                                daysSelected.values.all { !it } ||
-                                notificationHour.isEmpty() ||
-                                address.isEmpty() || city.isEmpty() || postalCode.isEmpty()
-                            ) {
+                            if (notificationTitle.isEmpty() || daysSelected.values.all { !it } || notificationHour.isEmpty()) {
                                 isErrorVisible = true
                                 return@Button
                             }
+                            val orderedDays = listOf("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche")
+                            val daysSelectedString = daysSelected.filterValues { it } // Garde seulement les jours sélectionnés
+                                .keys // Récupère les noms des jours
+                                .sortedWith(compareBy { orderedDays.indexOf(it) }) // Trie selon l'ordre défini dans orderedDays
+                                .joinToString(separator = ", ")
 
-                            val fullAddress = "$address, $postalCode $city, France"
-                            val geocoder = Geocoder(context, Locale.getDefault())
-                            val location = geocoder.getFromLocationName(fullAddress, 1)
-                            Log.d(null, "l'adresse est la suivante" + location.toString())
-
-                            if (location != null && location.isNotEmpty()) {
-                                val latitude = location[0].latitude
-                                val longitude = location[0].longitude
-
-                                val orderedDays = listOf("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche")
-                                val daysSelectedString = daysSelected.filterValues { it }
-                                    .keys
-                                    .sortedWith(compareBy { orderedDays.indexOf(it) })
-                                    .joinToString(", ")
-
-                                onAddNotification(notificationTitle, notificationDescription, notificationHour, daysSelectedString)
-
-                                addGeofence(
-                                    context = context,
-                                    latitude = latitude,
-                                    longitude = longitude,
-                                    title = notificationTitle
-                                )
-
-                                onDismiss()
-                            } else {
-                                isErrorVisible = true
-                            }
-
+                            onAddNotification(notificationTitle, notificationDescription, notificationHour, daysSelectedString)
+                            onDismiss()
                         }) {
                             Text("Ajouter")
                         }
@@ -176,3 +116,4 @@ fun CustomModal(
         }
     }
 }
+

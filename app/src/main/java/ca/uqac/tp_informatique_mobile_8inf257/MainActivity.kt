@@ -1,6 +1,8 @@
 package ca.uqac.tp_informatique_mobile_8inf257
 
 import Menu
+import android.Manifest.permission.ACCESS_BACKGROUND_LOCATION
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.Manifest.permission.POST_NOTIFICATIONS
 import android.content.pm.PackageManager
 import android.os.Build
@@ -10,6 +12,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -94,9 +97,51 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun requestLocalisationPermission(){
+        when {
+            ContextCompat.checkSelfPermission(
+                this, ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED -> {}
+
+            ActivityCompat.shouldShowRequestPermissionRationale(
+                this, ACCESS_FINE_LOCATION
+            ) -> {
+                requestPermissionLauncher.launch(ACCESS_FINE_LOCATION)
+            }
+            else -> {
+                requestPermissionLauncher.launch(ACCESS_FINE_LOCATION)
+            }
+
+        }
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private fun requestLocalisationBackgroundPermission(){
+        when {
+            ContextCompat.checkSelfPermission(
+                this, ACCESS_BACKGROUND_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED -> {}
+
+            ActivityCompat.shouldShowRequestPermissionRationale(
+                this, ACCESS_BACKGROUND_LOCATION
+            ) -> {
+                requestPermissionLauncher.launch(ACCESS_BACKGROUND_LOCATION)
+            }
+            else -> {
+                requestPermissionLauncher.launch(ACCESS_BACKGROUND_LOCATION)
+            }
+
+        }
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestNotificationPermission()
+        requestLocalisationPermission()
+        requestLocalisationBackgroundPermission()
         setContent {
             TPInformatiqueMobile8INF257Theme {
                 val navController = rememberNavController()

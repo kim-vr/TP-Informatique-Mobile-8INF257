@@ -13,11 +13,13 @@ roomVersion = "2.6.1"
 kspVersion = "2.0.0-1.0.24"
 daggerHiltVersion = "2.51.1"
 hiltNavigationComposeVersion = "1.2.0"
+playserviceslocation = "21.0.1"
 junitJupiter = "5.8.1"
 junitJunit = "4.12"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playserviceslocation" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
