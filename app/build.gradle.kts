@@ -61,6 +61,9 @@ dependencies {
     testImplementation(libs.junit.junit)
     ksp(libs.androidx.room.compiler)
 
+    implementation(libs.play.services.location)
+
+
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     kapt(libs.hilt.android.compiler)
